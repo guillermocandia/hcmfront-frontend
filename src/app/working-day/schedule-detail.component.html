@@ -1,0 +1,50 @@
+<ng-container [formGroup]="form">
+
+  <td class="mat-cell">
+    <mat-form-field>
+      <input matInput type="text" formControlName="start" required>
+      <mat-error *ngIf="start.invalid">
+        Start <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+  </td>
+
+  <td class="mat-cell">
+    <mat-form-field>
+      <input matInput type="text" formControlName="end" required>
+      <mat-error *ngIf="end.invalid">
+        End <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+  </td>
+
+  <td class="mat-cell">
+    <mat-form-field>
+      <mat-select placeholder="Day" formControlName="dayOfTheWeek">
+        <mat-option *ngFor="let day of days" [value]="day.id">
+          {{day.name}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="dayOfTheWeek.invalid">
+        DayOfWeek <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+  </td>
+
+
+  <td class="mat-cell">
+      <button *ngIf="!editing" mat-icon-button color="basic" title="Editar" (click)="edit()">
+        <mat-icon aria-hidden="true">edit</mat-icon>
+      </button>
+      <button *ngIf="editing" mat-icon-button color="primary" type="submit" (click)="save()" title="Guardar" [disabled]="form.invalid">
+        <mat-icon aria-hidden="true">save</mat-icon>
+      </button>
+      <button *ngIf="editing" mat-icon-button color="warn" title="Cancelar" (click)="cancel()">
+        <mat-icon aria-hidden="true">clear</mat-icon>
+      </button>
+      <button *ngIf="editing && !new" mat-icon-button color="warn" title="Eliminar" (click)="delete()">
+        <mat-icon aria-hidden="true">delete_forever</mat-icon>
+      </button>
+    </td>
+
+</ng-container>

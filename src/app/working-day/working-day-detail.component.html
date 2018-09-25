@@ -1,0 +1,53 @@
+<div class="form-container mat-typography">
+
+  <h2>Working Day</h2>
+
+  <div class="table-header">
+
+    <form [formGroup]="form" class="form" novalidate>
+      <mat-form-field>
+        <input matInput type="text" placeholder="Name" formControlName="name" required>
+        <mat-error *ngIf="name.invalid && (name.dirty || name.touched)">
+          Name <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="text" placeholder="Code" formControlName="code" required>
+        <mat-error *ngIf="code.invalid && (code.dirty || code.touched)">
+          Code <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <div class="spacer"></div>
+      <div class="button-row">
+        <button mat-raised-button color="primary" type="submit" (click)="save()" [disabled]="form.invalid">Save</button>
+        <button mat-raised-button color="primary" type="reset" (click)="cancel()">Cancel</button>
+        <button mat-raised-button color="primary" type="button" (click)="newSchedule()" [disabled]="form.invalid || new">New Schedule</button>
+      </div>
+    </form>
+
+    <div class="md-tabla">
+      <div class="mat-elevation-z1">
+        <table class="mat-table">
+
+          <tr class="mat-header-row">
+            <td class="mat-header-cell">Start</td>
+            <td class="mat-header-cell">End</td>
+            <td class="mat-header-cell">Day of Week</td>
+            <td class="mat-header-cell">Actions</td>
+          </tr>
+
+          <tr class="mat-row" app-schedule-detail *ngFor="let schedule of schedules"
+            [schedule]="schedule"
+            [workingDay]="workingDay.id"
+            (scheduleDelete)="onScheduleDelete($event)">
+          </tr>
+
+        </table>
+
+      </div>
+
+  </div>
+
+</div>
